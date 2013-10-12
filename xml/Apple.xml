@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding ="windows-1251"?>
+<Appledb path = "B:\\Programs\\Java\\Projects\\SC_Project\\Apple">
+
+<Section>
+	<Apple attr = "Apple_ID" key = "Apple_ID">3 7 6</Apple>
+</Section>
+
+<Result>
+	<Store attr = "Address" key = "Store_ID"></Store>
+	<Sales attr = "Amount" key = "fact"></Sales>
+</Result>
+
+</Appledb>	
