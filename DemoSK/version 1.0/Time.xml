@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding ="windows-1251"?>
+<Appledb path = "B:\\University\\AllProjects\\Projects\\DemoSK\\Apple">
+
+<Section>
+	<Time key = "Time_ID">1 2 5 4</Time>
+</Section>
+
+<Result>
+	<Apple attr = "Name" key = "Apple_ID"/>
+	<Sales attr = "Amount" key = "fact"/>
+	<Store attr = "Name" key = "Store_ID"/>
+</Result>
+
+</Appledb>	

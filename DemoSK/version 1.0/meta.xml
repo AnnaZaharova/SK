@@ -1,0 +1,38 @@
+﻿<?xml version = "1.0" encoding ="windows-1251"?>
+<Appledb>
+
+<Fact>
+	<Sales name = "Sales">
+		<Apple_ID name = "Apple_ID"/>
+		<Store_ID name = "Store_ID">
+		<Time_ID name = "Time_ID"/>
+		<Amount name = "Amount"/>
+		<Total_Price = "Total_Price"/>
+	</Sales>
+</Fact>
+
+<Dimension>
+	<Store  name = "Store">
+		<Store_ID name = "Store_ID"/>
+		<Phone name = "Phone"/>
+		<Name name = "Name"/>
+		<Address name = "Address"/>
+		<Region name = "Region"/>
+	</Store>
+
+	<Time   name = "Time"/>
+		<Time_ID name = "Time_ID"/>
+		<Day name = "Day"/>
+		<Month name = "Month"/>
+		<Year name = "Year">
+	</Time>
+		
+	<Apple  name = "Apple">
+		<Apple_ID name = "Apple_ID"/>
+		<Name name = "Name"/>
+		<Price name = "Price"/>
+		<Weight name = "Weight"/>
+	</Apple>
+</Dimension>
+
+</Appledb>	

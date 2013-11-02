@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding ="windows-1251"?>
+<Appledb path = "B:\\University\\AllProjects\\Projects\\DemoSK\\Apple">
+
+<Section>
+	<Яблоко key = "Яблоко_ID" fact = "fk_Яблоко_ID">3 7 6</Яблоко>
+</Section>
+
+<Result>
+	<Магазин attr = "Адрес" key = "Магазин_ID" fact = "fk_Магазин_ID"/>
+	<Продажи attr = "Количество" key = "fact" />
+	<Время attr = "Год" key = "Время_ID" fact = "fk_Время_ID"/>
+</Result>
+</Appledb>

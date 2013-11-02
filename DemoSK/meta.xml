@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "windows - 1251"?>
+<CubeInfo id = "1" name = "cube1">
+<Dimensions>
+	<Apple>
+		<DimensionInfo>
+			<id>1</id>
+			<name>Яблоки</name>
+		</DimensionInfo>
+		
+		<Attributs>
+			<Name>
+				<id>1</id>
+				<type>text</type>
+				<visible>true</visible>
+				<description>Название</description>
+			</Name>
+			
+			<Price>
+				<id>2</id>
+				<type>number</type>
+				<visible>true</visible>
+				<description>Цена</description>
+			</Price>
+			

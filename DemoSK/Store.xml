@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Appledb name="Apple">
+<Cells>
+<Dimension_by_Row>Time</Dimension_by_Row>
+<Dimension_by_Column>Apple</Dimension_by_Column>
+</Cells>
+<Fixed>
+<Store>2 9</Store>
+</Fixed>
+<Selection>
+<Time>3 8 4</Time>
+<Apple>2 4</Apple>
+</Selection>
+</Appledb>

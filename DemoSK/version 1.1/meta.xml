@@ -1,0 +1,38 @@
+﻿<?xml version = "1.0" encoding ="windows-1251"?>
+<Appledb>
+
+<Fact>
+	<Sales name = "Продажи">
+		<Apple_ID name = "fk_Яблоко_ID"/>
+		<Store_ID name = "fk_Магазин_ID">
+		<Time_ID name = "fk_Время_ID"/>
+		<Amount name = "Количество"/>
+		<Total_Price name = "Общая сумма"/>
+	</Sales>
+</Fact>
+
+<Dimension>
+	<Store  name = "Магазин">
+		<Store_ID name = "Магазин_ID/>
+		<Phone name = "Телефон"/>
+		<Name name = "Название"/>
+		<Address name = "Адрес"/>
+		<Region name = "Регион"/>
+	</Store>
+
+	<Time   name = "Время"/>
+		<Time_ID name = "Время_ID"/>
+		<Day name = "День"/>
+		<Month name = "Месяц"/>
+		<Year name = "Год">
+	</Time>
+		
+	<Apple  name = "Яблоко">
+		<Apple_ID name = "Яблоко_ID"/>
+		<Name name = "Название"/>
+		<Price name = "Цена"/>
+		<Weight name = "Вес"/>
+	</Apple>
+</Dimension>
+
+</Appledb>	
