@@ -12,22 +12,15 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Parser {
-   
-   
-    //таблицы, содержащие результирующие атрибуты
-    ArrayList<String> table  = new ArrayList<String>();
     
-      //результирующие атрибуты
-    ArrayList<String> attr = new ArrayList<String>();
+        //имя измерения № 1 и его ключи
+    ArrayList<String> dimension1  = new ArrayList<String>();
     
-        //ключи результирующих таблиц
-    ArrayList<String> key  = new ArrayList<String>();
+        //имя измерения № 2 и его ключи
+    ArrayList<String> dimension2  = new ArrayList<String>();
     
-     //используется для хранение сечения(таблица, ключ)
-    ArrayList<String> section  = new ArrayList<String>(2);
-    
-    //конкретные значения ключа сечения section
-    ArrayList<String> rezult = new ArrayList<String>();
+        //имя фиксируемого измерения и его ключи
+    ArrayList<String> fixed  = new ArrayList<String>(2);  
     
      //имя БД
    public String dbName = "";
@@ -39,7 +32,7 @@ public class Parser {
    
    public Parser(){}
    
-   public  ArrayList<String> createDomParser(File file) {
+   public  void createDomParser(File file) {
        try{
        //Get the DOM Builder factory
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -49,68 +42,60 @@ public class Parser {
             
        //Load and Parse the XML document
        //document contains the complete XML as a Tree.
-                getDomTree( builder,file);
+                openXML( builder,file);
        }
        catch(Exception e){
            System.out.println("Error : "+e.getClass().getName());
        }
-       return attr;
    }
-    private void getDomTree(DocumentBuilder builder,File file) throws IOException{
+    private void openXML(DocumentBuilder builder,File file) throws IOException{
         try {
-            document=builder.parse(file);  
+            document = builder.parse(file);  
         } catch (Exception e) {
             System.out.println("Error : "+e.getClass().getName());
         }
         Element root = document.getDocumentElement();
-        dbName = root.getAttribute("path");
+        dbName = root.getAttribute("name");
         NodeList nodelist = root.getChildNodes();
         for (int i = 1; i < nodelist.getLength(); i++) {
-            Node node = nodelist.item(i);
-            if (node instanceof Element) {
-                if(node.getNodeName().equals("Section")){
-                    section.add( node.getChildNodes().item(1).getNodeName());
-                    section.add(node.getChildNodes().item(1).getAttributes().getNamedItem("key").getNodeValue());
-                    StringTokenizer st = new StringTokenizer(node.getChildNodes().item(1).getTextContent());
-                    while (st.hasMoreElements()) {
-                        rezult.add((String)st.nextElement());
+                //Получение названия измерений
+                if((nodelist.item(i).getNodeName()).equals("Cells")){
+                        NodeList  dimNode = nodelist.item(i).getChildNodes();
+                        for(int j = 0; j < dimNode.getLength(); j++){
+                            if(dimNode.item(j).getNodeName().equals("Dimension_by_Row")){
+                                Element element = (Element)dimNode.item(j);
+                                dimension1.add(element.getTextContent());
+ 
+                            }
+                            if(dimNode.item(j).getNodeName().equals("Dimension_by_Column"))
+                                dimension2.add(((Element)dimNode.item(j)).getTextContent());
                     }
                 }
-                if(node.getNodeName().equals("Result")){
-                    NodeList nodelist1 = node.getChildNodes();
-                    for (int j = 1; j < nodelist1.getLength(); j++) {
-                        Node node1 = nodelist1.item(j);
-                         if (node1 instanceof Element) {
-                             table.add(node1.getNodeName());
-                             attr.add(node1.getAttributes().getNamedItem("attr").getNodeValue());
-                             key.add(node1.getAttributes().getNamedItem("key").getNodeValue());
-                         }
+                //Получение информации об фиксируемом измерении
+                if((nodelist.item(i).getNodeName()).equals("Fixed")){
+                    NodeList fixedList = nodelist.item(i).getChildNodes();
+                    for(int t = 0; t < fixedList.getLength(); t++){
+                        if(fixedList.item(t) instanceof  Element){
+                            fixed.add(fixedList.item(t).getNodeName());
+                            fixed.add(((Element)(fixedList.item(t))).getTextContent());
+                        }
                     }
                 }
-            }
+                
+                //Получение ключей измерений
+                if((nodelist.item(i).getNodeName()).equals("Selection")){
+                    NodeList  dimNode = nodelist.item(i).getChildNodes();
+                    for(int j = 0; j < dimNode.getLength(); j++){
+                            if(dimNode.item(j).getNodeName().equals(dimension1.get(0))){
+                                dimension1.add(((Element)dimNode.item(j)).getTextContent());
+                                System.out.println(((Element)dimNode.item(j)).getTextContent());
+                            }
+                            if(dimNode.item(j).getNodeName().equals(dimension2.get(0)))
+                                dimension2.add(((Element)dimNode.item(j)).getTextContent());
+                            
+                    }
+                }
+                
         }
-        getRezult();
-    }
-       
-    private void getRezult(){
-        request = "Select ";
-        for (int i = 0; i< table.size(); i++) {
-            request += table.get(i) +"."+attr.get(i) +" ";
-            if(i+1!=table.size())
-               request+=", ";
-        }
-        request +="from Sales ";
-        for (int i = 0; i< table.size(); i++){  
-                    if(!table.get(i).equals("Sales"))      
-                request += " inner join "+table.get(i)+" on Sales."+key.get(i)+" = " + table.get(i)+"."+key.get(i)+" ";
-        }
-        request+=" inner join "+section.get(0)+" on Sales."+section.get(1)+" = " + section.get(0)+"."+section.get(1)+" ";
-         request +="where "+section.get(0)+"."+section.get(1)+" IN (";
-         for(int i = 0; i < rezult.size(); i++){
-             request+= " '"+rezult.get(i)+"'";
-             if(i+1 != rezult.size())
-                 request+=",";
-         }
-         request+=" )";
     }
 }

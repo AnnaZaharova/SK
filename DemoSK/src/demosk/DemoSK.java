@@ -9,8 +9,6 @@ import java.sql.*;
 
 class DemoSK{
     public static void main(String[] args){
-        CreateXml cr = new CreateXml();
-        cr.buildXml();
         Parser parser;
         String dbPath = "";
         String request = "";
@@ -20,7 +18,7 @@ class DemoSK{
         int choice = 0;
         Scanner sc = new Scanner(System.in);
         while(true){
-        System.out.println("\t\t\t ***Menu*** \n1.Выбрать xml\n2.Показать xml\n3.Показать результат\n4.Выход");
+        System.out.println("\t\t\t ***Menu*** \n1.Выбрать xml\n2.Создать xml\n3.Показать результат\n4.Выход");
         choice = sc.nextInt();
         switch(choice){
             case 1:
@@ -48,12 +46,8 @@ class DemoSK{
                 request = parser.request;
                 break;
             case 2:
-                String [] cmd = new String[]{"cmd.exe","/C" ,currentPath+"\\Apple.xml"};
-                try{
-                    Runtime.getRuntime().exec(cmd);
-                }catch(Exception e){
-                    System.out.println(e.getClass().getName());
-                }
+                        CreateXml cr = new CreateXml();
+                        cr.buildXml();
                 break;
             case 3:
                 Sqlite.getResultSet(dbPath, request);

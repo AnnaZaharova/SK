@@ -1,14 +1,14 @@
-<?xml version = "1.0" encoding ="windows-1251"?>
-<Appledb path = "B:\\Programs\\Java\\Projects\\SC_Project\\Apple">
-
-<Section>
-	<Time key = "Time_ID">1 2 5 4</Time>
-</Section>
-
-<Result>
-	<Apple attr = "Name" key = "Apple_ID"/>
-	<Sales attr = "Amount" key = "fact"/>
-	<Store attr = "Name" key = "Store_ID"/>
-</Result>
-
-</Appledb>	
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Appledb name="Apple">
+<Cells>
+<Dimension_by_Row>Store</Dimension_by_Row>
+<Dimension_by_Column>Apple</Dimension_by_Column>
+</Cells>
+<Fixed>
+<Time>1</Time>
+</Fixed>
+<Selection>
+<Store>3 6</Store>
+<Apple>3 6</Apple>
+</Selection>
+</Appledb>
